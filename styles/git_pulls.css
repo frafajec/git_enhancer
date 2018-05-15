@@ -1,0 +1,25 @@
+.git-enhancer-data-footer > *::after {
+  content: '•';
+  margin: 0 5px;
+}
+
+.git-enhancer-data-footer > *:last-child::after {
+  content: '';
+}
+
+.jira-anchor {
+  margin-right: 5px;
+}
+
+.jira-anchor img {
+  width: 17px;
+  height: 17px;
+  margin-bottom: -4px;
+}
+
+.jira-copy-issue {
+  width: 17px;
+  height: 17px;
+  margin-bottom: -4px;
+  cursor: pointer;
+}

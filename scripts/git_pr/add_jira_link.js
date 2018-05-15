@@ -1,4 +1,6 @@
-function replaceJiraLink() {
+// ------------------------------------------------------------------
+// reads title and adds anchor to jira
+function addJiraLink() {
   const issueTitle = document.getElementsByClassName('js-issue-title');
   const jiraTitle = document.getElementsByClassName('jira-title-link');
 
@@ -9,17 +11,3 @@ function replaceJiraLink() {
     issueTitle[0].innerHTML = issueTitle[0].innerHTML.replace(/([a-z0-9]{2,5}-\d{1,4})/gi, replace);
   }
 }
-
-// script subscription
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.git_pr_content) {
-    chrome.storage.sync.get(
-      {
-        jiraTitleLink: false,
-      },
-      function({ jiraTitleLink }) {
-        jiraTitleLink && replaceJiraLink();
-      }
-    );
-  }
-});

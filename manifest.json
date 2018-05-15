@@ -10,11 +10,20 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/picmonkey/*"],
-      "js": ["scripts/git_pr_content.js"]
+      "js": ["scripts/git_pr/add_jira_link.js", "scripts/git_pr/index.js"]
     },
     {
       "matches": ["https://github.com/picmonkey/*"],
-      "js": ["scripts/git_pulls.js"]
+      "js": [
+        "scripts/git_pulls/git_api.js",
+        "scripts/git_pulls/create_data_footer.js",
+        "scripts/git_pulls/add_branch_data.js",
+        "scripts/git_pulls/add_update_date.js",
+        "scripts/git_pulls/add_copy.js",
+        "scripts/git_pulls/add_jira_anchor.js",
+        "scripts/git_pulls/index.js"
+      ],
+      "css": ["styles/git_pulls.css"]
     }
   ],
   "web_accessible_resources": ["assets/*"],

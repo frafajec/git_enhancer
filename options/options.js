@@ -4,7 +4,8 @@ function save_options() {
   const pToken = document.getElementById('personal-token').value;
   const jiraTitleLink = document.getElementById('jira-title-link').checked;
   const jiraAnchor = document.getElementById('jira-anchor').checked;
-  const jiraBranchData = document.getElementById('jira-branch-data').checked;
+  const gitBranchData = document.getElementById('git-branch-data').checked;
+  const gitUpdateDate = document.getElementById('git-update-date').checked;
   const jiraCopy = document.getElementById('jira-copy-issue').checked;
 
   chrome.storage.sync.set(
@@ -13,7 +14,8 @@ function save_options() {
       jiraTitleLink,
       jiraAnchor,
       jiraCopy,
-      jiraBranchData,
+      gitBranchData,
+      gitUpdateDate,
     },
     function() {
       // Update status to let user know options were saved.
@@ -33,14 +35,16 @@ function restore_options() {
       pToken: '',
       jiraTitleLink: false,
       jiraAnchor: false,
-      jiraBranchData: false,
+      gitBranchData: false,
+      gitUpdateDate: false,
       jiraCopy: false,
     },
     function(items) {
       document.getElementById('personal-token').value = items.pToken;
       document.getElementById('jira-title-link').checked = items.jiraTitleLink;
       document.getElementById('jira-anchor').checked = items.jiraAnchor;
-      document.getElementById('jira-branch-data').checked = items.jiraBranchData;
+      document.getElementById('git-branch-data').checked = items.gitBranchData;
+      document.getElementById('git-update-date').checked = items.gitUpdateDate;
       document.getElementById('jira-copy-issue').checked = items.jiraCopy;
     }
   );
