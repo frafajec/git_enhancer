@@ -4,6 +4,7 @@ const jiraNumberRegex = /([a-z0-9]{2,5}-\d{1,4})/gi;
 // adds Jira issue link next to PR
 function addJiraAnchor() {
   const anchorClass = 'jira-anchor';
+  const jiraIconSrc = chrome.extension.getURL('assets/jira-icon.png');
 
   function insertAnchor(anchor, title) {
     if (!title) return null;
@@ -15,7 +16,11 @@ function addJiraAnchor() {
       jiraAnchor.setAttribute('target', '_blank');
       jiraAnchor.setAttribute('class', anchorClass);
       jiraAnchor.setAttribute('style', 'margin-right: 5px;');
-      jiraAnchor.innerHTML = '<>';
+
+      const jiraIcon = document.createElement('img');
+      jiraIcon.setAttribute('src', jiraIconSrc);
+      jiraIcon.setAttribute('style', 'width: 17px; height: 17px; margin-bottom: -4px;');
+      jiraAnchor.appendChild(jiraIcon);
 
       anchor.parentNode.insertBefore(jiraAnchor, anchor);
     }
@@ -38,23 +43,21 @@ function addJiraAnchor() {
 // QA help - adds copy issue btn
 function addCopyBtnPR() {
   const copyBtnClass = 'jira-copy-issue';
+  const copyIconSrc = chrome.extension.getURL('assets/copy.png');
 
   function insertBtn(anchor, jiraNumber, copyString) {
     function copyToClipboard() {
       navigator.clipboard.writeText(copyString);
     }
 
-    let copyBtn = document.createElement('button');
+    const copyBtn = document.createElement('img');
     copyBtn.setAttribute('id', `jira-copy-id-${jiraNumber}`);
     copyBtn.setAttribute('class', copyBtnClass);
-    copyBtn.setAttribute('style', 'padding: 0 5px; display: inline-block; border-radius: 10px;');
-    copyBtn.innerHTML = 'C';
+    copyBtn.setAttribute('src', copyIconSrc);
+    copyBtn.setAttribute('style', 'width: 17px; height: 17px; margin-bottom: -4px; cursor: pointer;');
 
     anchor.parentNode.insertBefore(copyBtn, anchor);
-
-    document
-      .getElementById(`jira-copy-id-${jiraNumber}`)
-      .addEventListener('click', copyToClipboard);
+    document.getElementById(`jira-copy-id-${jiraNumber}`).addEventListener('click', copyToClipboard);
   }
   const issueList = document.getElementsByClassName('js-issue-row');
   const added = document.getElementsByClassName(copyBtnClass);
@@ -67,9 +70,7 @@ function addCopyBtnPR() {
       // [V3-123] text - URL
       const copyString = `${jiraTitle.innerHTML
         .trim()
-        .replace(jiraNumberRegex, `[${jiraNumber}]`)} - https://github.com${jiraTitle.getAttribute(
-        'href'
-      )}`;
+        .replace(jiraNumberRegex, `[${jiraNumber}]`)} - https://github.com${jiraTitle.getAttribute('href')}`;
 
       insertBtn(jiraTitle, jiraNumber, copyString);
     }

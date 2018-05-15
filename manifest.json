@@ -17,6 +17,7 @@
       "js": ["scripts/git_pulls.js"]
     }
   ],
+  "web_accessible_resources": ["assets/*"],
   "options_ui": {
     "page": "options/options.html",
     "open_in_tab": false
