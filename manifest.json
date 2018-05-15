@@ -1,0 +1,20 @@
+{
+  "name": "Git Enhancer",
+  "version": "1.0",
+  "description": "Parkside helper extension",
+  "manifest_version": 2,
+  "permissions": ["tabs"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/picmonkey/*"],
+      "js": ["scripts/git_pr_content.js"]
+    },
+    {
+      "matches": ["https://github.com/picmonkey/*"],
+      "js": ["scripts/git_pulls.js"]
+    }
+  ]
+}
