@@ -1,0 +1,49 @@
+// Saves options to chrome.storage
+function save_options() {
+  // options
+  const pToken = document.getElementById('personal-token').value;
+  const jiraTitleLink = document.getElementById('jira-title-link').checked;
+  const jiraAnchor = document.getElementById('jira-anchor').checked;
+  const jiraBranchData = document.getElementById('jira-branch-data').checked;
+  const jiraCopy = document.getElementById('jira-copy-issue').checked;
+
+  chrome.storage.sync.set(
+    {
+      pToken,
+      jiraTitleLink,
+      jiraAnchor,
+      jiraCopy,
+      jiraBranchData,
+    },
+    function() {
+      // Update status to let user know options were saved.
+      var status = document.getElementById('status');
+      status.textContent = 'Options saved.';
+      setTimeout(function() {
+        status.textContent = '';
+      }, 750);
+    }
+  );
+}
+
+// Restores UI from storage
+function restore_options() {
+  chrome.storage.sync.get(
+    {
+      pToken: '',
+      jiraTitleLink: false,
+      jiraAnchor: false,
+      jiraBranchData: false,
+      jiraCopy: false,
+    },
+    function(items) {
+      document.getElementById('personal-token').value = items.pToken;
+      document.getElementById('jira-title-link').checked = items.jiraTitleLink;
+      document.getElementById('jira-anchor').checked = items.jiraAnchor;
+      document.getElementById('jira-branch-data').checked = items.jiraBranchData;
+      document.getElementById('jira-copy-issue').checked = items.jiraCopy;
+    }
+  );
+}
+document.addEventListener('DOMContentLoaded', restore_options);
+document.getElementById('save').addEventListener('click', save_options);

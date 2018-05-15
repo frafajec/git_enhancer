@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Parkside helper extension",
   "manifest_version": 2,
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "background": {
     "scripts": ["background.js"]
   },
@@ -16,5 +16,9 @@
       "matches": ["https://github.com/picmonkey/*"],
       "js": ["scripts/git_pulls.js"]
     }
-  ]
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  }
 }

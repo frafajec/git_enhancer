@@ -3,7 +3,7 @@ const jiraNumberRegex = /([a-z0-9]{2,5}-\d{1,4})/gi;
 // ------------------------------------------------------------------
 // adds Jira issue link next to PR
 function addJiraAnchor() {
-  const anchorClass = 'jira-link-title';
+  const anchorClass = 'jira-anchor';
 
   function insertAnchor(anchor, title) {
     if (!title) return null;
@@ -78,12 +78,12 @@ function addCopyBtnPR() {
 
 // ------------------------------------------------------------------
 // branch names
-function callApi(prURL, callback) {
+function callApi(prURL, pToken, callback) {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', prURL, true);
   xhr.setRequestHeader('Content-type', 'application/vnd.github.symmetra-preview+json');
   xhr.setRequestHeader('Accept', 'application/vnd.github.v3+json');
-  xhr.setRequestHeader('Authorization', 'token XXX'); // Todo pick up from storage?
+  xhr.setRequestHeader('Authorization', `token ${pToken}`);
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
       callback(JSON.parse(xhr.response));
@@ -92,7 +92,7 @@ function callApi(prURL, callback) {
   xhr.send();
 }
 
-function getBranchData() {
+function getBranchData(pToken) {
   function insertBranchData(anchor, pr) {
     const container = document.createElement('div');
     container.setAttribute('class', 'mt-1 text-small text-gray');
@@ -108,7 +108,7 @@ function getBranchData() {
 
   if (added.length === 0) {
     const prUrl = 'https://api.github.com/repos/picmonkey/picmonkey/pulls';
-    callApi(prUrl, response => {
+    callApi(prUrl, pToken, response => {
       const issueList = document.getElementsByClassName('js-issue-row');
 
       for (let i = 0; i < issueList.length; i++) {
@@ -126,8 +126,18 @@ function getBranchData() {
 // script subscription
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.git_pulls) {
-    addJiraAnchor();
-    addCopyBtnPR();
-    getBranchData();
+    chrome.storage.sync.get(
+      {
+        pToken: '',
+        jiraAnchor: false,
+        jiraBranchData: false,
+        jiraCopy: false,
+      },
+      function({ jiraAnchor, jiraCopy, jiraBranchData, pToken }) {
+        jiraAnchor && addJiraAnchor();
+        jiraCopy && addCopyBtnPR();
+        jiraBranchData && pToken.length && getBranchData(pToken);
+      }
+    );
   }
 });

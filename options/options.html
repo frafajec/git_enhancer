@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Git Enhancer</title>
+</head>
+
+<style>
+    label {
+        display: block;
+    }
+
+    #personal-token {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    #save {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+
+    <label> [*] Git personal access token</label>
+    <input type="text" id="personal-token">
+
+    <label>
+        <input type="checkbox" id="jira-title-link"> [PR] Jira title link
+    </label>
+
+    <label>
+        <input type="checkbox" id="jira-anchor"> [Pulls] Jira anchor
+    </label>
+
+    <label>
+        <input type="checkbox" id="jira-branch-data"> [Pulls] Jira branch data (* token)
+    </label>
+
+    <label>
+        <input type="checkbox" id="jira-copy-issue"> [Pulls] Copy PR
+    </label>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
