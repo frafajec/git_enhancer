@@ -10,7 +10,7 @@ function replaceJiraLink() {
   }
 }
 
-// actual script run
+// script subscription
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.git_pr_content) {
     replaceJiraLink();
