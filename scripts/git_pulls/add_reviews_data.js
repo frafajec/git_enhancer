@@ -35,11 +35,11 @@ function addReviewsData(pToken) {
   // ------------------------------
   // collect reviews and reason
   const getReviewStates = reviews => {
-    const reviewSeattleHtml = [];
+    const reviewsSeattle = [];
     let reviewSeattleState = REVIEW_STATE.PENDING;
     let reviewSeattleHasApproved = false;
     let reviewSeattleHasRejected = false;
-    const reviewPsideHtml = [];
+    const reviewsPside = [];
     let reviewPsideState = REVIEW_STATE.PENDING;
     let reviewPsideHasApproved = false;
     let reviewPsideHasRejected = false;
@@ -54,24 +54,40 @@ function addReviewsData(pToken) {
         if (reviewState === REVIEW_STATE.APPROVED) reviewSeattleHasApproved = true;
         if (reviewState === REVIEW_STATE.REJECTED) reviewSeattleHasRejected = true;
 
-        reviewSeattleHtml.push(`${reviewUser} ${createUserReviewImg(reviewState)}`);
+        reviewsSeattle.push(`${reviewUser} ${createUserReviewImg(reviewState)}`);
       } else {
         if (reviewState === REVIEW_STATE.APPROVED) reviewPsideHasApproved = true;
         if (reviewState === REVIEW_STATE.REJECTED) reviewPsideHasRejected = true;
 
-        reviewPsideHtml.push(`${reviewUser} ${createUserReviewImg(reviewState)}`);
+        reviewsPside.push(`${reviewUser} ${createUserReviewImg(reviewState)}`);
       }
     }
 
+    // set pr state overall
     if (reviewSeattleHasApproved) reviewSeattleState = REVIEW_STATE.APPROVED;
     if (reviewSeattleHasRejected) reviewSeattleState = REVIEW_STATE.REJECTED;
     if (reviewPsideHasApproved) reviewPsideState = REVIEW_STATE.APPROVED;
     if (reviewPsideHasRejected) reviewPsideState = REVIEW_STATE.REJECTED;
 
     return {
-      seattleReview: { reviews: reviewSeattleHtml, state: reviewSeattleState },
-      psideReview: { reviews: reviewPsideHtml, state: reviewPsideState },
+      seattleReview: { reviews: reviewsSeattle, state: reviewSeattleState },
+      psideReview: { reviews: reviewsPside, state: reviewPsideState },
     };
+  };
+
+  const uniquifyReviews = (arr, key) => {
+    const unique = [];
+    const found = {};
+
+    arr.forEach(obj => {
+      var value = obj.user.id;
+      if (!found[value]) {
+        found[value] = true;
+        unique.push(obj);
+      }
+    });
+
+    return unique;
   };
 
   // ------------------------------------------------------
@@ -85,7 +101,7 @@ function addReviewsData(pToken) {
     const merged = !!issueList[i].querySelectorAll('.merged').length;
     const closed = !!issueList[i].querySelectorAll('.closed').length;
 
-    // only collect where there is review
+    // only collect where there is review and is open
     if (
       (!merged && !closed && reviewStatus.indexOf('Approved') !== -1) ||
       reviewStatus.indexOf('Changes requested') !== -1
@@ -111,7 +127,7 @@ function addReviewsData(pToken) {
 
       // ------------------------------
       // uniquify reviews per user
-      const reviews = prReviews[prID];
+      const reviews = uniquifyReviews(prReviews[prID].reverse());
 
       // ------------------------------
       // collect reviews
