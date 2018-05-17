@@ -23,3 +23,101 @@
   margin-bottom: -4px;
   cursor: pointer;
 }
+
+.git-reviews {
+  display: inline-block;
+  position: relative;
+}
+
+.git-reviews img.merge-state {
+  display: inline-block;
+  margin-bottom: -3px;
+  width: 16px;
+}
+
+.git-reviews img.review-image {
+  width: 12px;
+  margin-bottom: -2px;
+}
+
+/* Tooltips */
+.git-reviews .seattle-review span,
+.git-reviews .pside-review span {
+  display: none;
+
+  position: absolute;
+  z-index: 1000000;
+  padding: 0.5em 0.75em;
+  font: normal normal 11px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: pre;
+  pointer-events: none;
+  background: #1b1f23;
+  border-radius: 3px;
+
+  /* transform: translateX(50%); */
+  transform: translateX(-41%);
+  top: 18px;
+  /* right: 50%; */
+  margin-top: 6px;
+  opacity: 0;
+  animation-name: tooltip-appear;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  animation-delay: 0.4s;
+}
+.git-reviews .seattle-review span::before,
+.git-reviews .pside-review span::before {
+  position: absolute;
+  z-index: 1000001;
+  width: 0;
+  height: 0;
+  color: #1b1f23;
+  pointer-events: none;
+  content: '';
+  border: 6px solid transparent;
+  opacity: 0;
+
+  top: auto;
+  /* transform: translateY(-50%); */
+  top: -12px;
+  right: 50%;
+  bottom: -7px;
+  margin-right: -6px;
+  border-bottom-color: #1b1f23;
+
+  display: inline-block;
+  text-decoration: none;
+  animation-name: tooltip-appear;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+  animation-delay: 0.4s;
+}
+
+.git-reviews .seattle-review:hover span,
+.git-reviews .pside-review:hover span,
+.git-reviews .seattle-review:focus span,
+.git-reviews .pside-review:focus span,
+.git-reviews .seattle-review:active span,
+.git-reviews .pside-review:active span {
+  display: block;
+}
+
+.git-reviews .pside-review span {
+  left: 20px;
+}
+
+.git-reviews .pside-review {
+  margin-left: 5px;
+}

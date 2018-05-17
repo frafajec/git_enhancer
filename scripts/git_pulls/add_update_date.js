@@ -4,9 +4,9 @@ function addUpdateDate(pullList) {
   const issueList = document.getElementsByClassName('js-issue-row');
 
   for (let i = 0; i < issueList.length; i++) {
-    const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi);
+    const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi)[0];
     const pr = pullList.find(x => x.number == prID);
-    if (!pr) return;
+    if (!pr) continue;
 
     const updatedDiff = (new Date().getTime() - new Date(pr.updated_at).getTime()) / (1000 * 3600 * 24);
     const lastUpdated = updatedDiff < 1 ? '<1 day ago' : Math.round(updatedDiff) + ' day(s) ago';

@@ -6,6 +6,7 @@ function save_options() {
   const jiraAnchor = document.getElementById('jira-anchor').checked;
   const gitBranchData = document.getElementById('git-branch-data').checked;
   const gitUpdateDate = document.getElementById('git-update-date').checked;
+  const gitReviews = document.getElementById('git-reviews').checked;
   const jiraCopy = document.getElementById('jira-copy-issue').checked;
 
   chrome.storage.sync.set(
@@ -16,6 +17,7 @@ function save_options() {
       jiraCopy,
       gitBranchData,
       gitUpdateDate,
+      gitReviews,
     },
     function() {
       // Update status to let user know options were saved.
@@ -37,6 +39,7 @@ function restore_options() {
       jiraAnchor: false,
       gitBranchData: false,
       gitUpdateDate: false,
+      gitReviews: false,
       jiraCopy: false,
     },
     function(items) {
@@ -45,6 +48,7 @@ function restore_options() {
       document.getElementById('jira-anchor').checked = items.jiraAnchor;
       document.getElementById('git-branch-data').checked = items.gitBranchData;
       document.getElementById('git-update-date').checked = items.gitUpdateDate;
+      document.getElementById('git-reviews').checked = items.gitReviews;
       document.getElementById('jira-copy-issue').checked = items.jiraCopy;
     }
   );

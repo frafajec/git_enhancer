@@ -4,9 +4,9 @@ function addBranchData(pullList) {
   const issueList = document.getElementsByClassName('js-issue-row');
 
   for (let i = 0; i < issueList.length; i++) {
-    const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi);
+    const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi)[0];
     const pr = pullList.find(x => x.number == prID);
-    if (!pr) return;
+    if (!pr) continue;
 
     const branchData = document.createElement('span');
     branchData.setAttribute('class', branchDataClass);
