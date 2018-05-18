@@ -3,6 +3,7 @@ const REVIEW_STATE = {
   REJECTED: 'CHANGES_REQUESTED',
   PENDING: 'PENDING',
   COMMENTED: 'COMMENTED',
+  DISMISSED: 'DISMISSED',
 };
 
 const REVIEW_ICON = {
@@ -10,6 +11,7 @@ const REVIEW_ICON = {
   [REVIEW_STATE.PENDING]: chrome.extension.getURL('assets/pending.png'),
   [REVIEW_STATE.REJECTED]: chrome.extension.getURL('assets/rejected.png'),
   [REVIEW_STATE.COMMENTED]: chrome.extension.getURL('assets/comment.png'),
+  [REVIEW_STATE.DISMISSED]: chrome.extension.getURL('assets/dismissed.png'),
 };
 
 // ------------------------------------------------------------------
@@ -91,14 +93,14 @@ function addReviewsData(pToken) {
   };
 
   // ------------------------------------------------------
-  //get all visible opened PRs // TODO! opened
+  //get all visible opened PRs
   const issueList = document.getElementsByClassName('js-issue-row');
   const reviewIDs = [];
   const reviewURLs = [];
   for (let i = 0; i < issueList.length; i++) {
     // what an amazing hack...
     const reviewStatus = issueList[i].querySelectorAll('.opened-by')[0].nextElementSibling.innerText;
-    const merged = !!issueList[i].querySelectorAll('.merged').length;
+    const merged = !!!issueList[i].querySelectorAll('.merged').length;
     const closed = !!issueList[i].querySelectorAll('.closed').length;
 
     // only collect where there is review and is open
