@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         jiraCopy && addCopyBtnPR();
 
         // always add footer (its invisible unless filled)
-        createDataFooter();
+        createDataFooter({ gitBranchData, gitUpdateDate, gitReviews });
 
         // ------------------------------
         // All general PR calls

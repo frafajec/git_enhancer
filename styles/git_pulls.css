@@ -1,3 +1,7 @@
+.git-enhancer-data-footer > * {
+  display: inline-block;
+}
+
 .git-enhancer-data-footer > *::after {
   content: '•';
   margin: 0 5px;

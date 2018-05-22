@@ -100,14 +100,11 @@ function addReviewsData(pToken) {
   for (let i = 0; i < issueList.length; i++) {
     // what an amazing hack...
     const reviewStatus = issueList[i].querySelectorAll('.opened-by')[0].nextElementSibling.innerText;
-    const merged = !!!issueList[i].querySelectorAll('.merged').length;
+    const merged = !!issueList[i].querySelectorAll('.merged').length;
     const closed = !!issueList[i].querySelectorAll('.closed').length;
 
     // only collect where there is review and is open
-    if (
-      (!merged && !closed && reviewStatus.indexOf('Approved') !== -1) ||
-      reviewStatus.indexOf('Changes requested') !== -1
-    ) {
+    if (!merged && !closed) {
       const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi)[0];
       reviewURLs.push(reviewURL.replace('$pr_number', prID));
       reviewIDs.push(prID);
@@ -142,7 +139,7 @@ function addReviewsData(pToken) {
 
       // ------------------------------
       // insert in DOM
-      const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${prID}"]`)[0];
+      const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${prID}"] .box-review`)[0];
       anchor.appendChild(reviewsData);
     }
   });

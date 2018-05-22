@@ -12,7 +12,7 @@ function addBranchData(pullList) {
     branchData.setAttribute('class', branchDataClass);
     branchData.innerHTML = `${pr.head.ref} -> ${pr.base.ref}`;
 
-    const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${pr.number}"]`)[0];
+    const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${pr.number}"] .box-branch`)[0];
     anchor.appendChild(branchData);
   }
 }
