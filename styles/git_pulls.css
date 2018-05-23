@@ -14,6 +14,21 @@
 }
 
 /* ---------------------------------- */
+/* git helper header */
+.git-enhancer-data-header {
+  clear: both;
+}
+
+.git-enhancer-data-header a {
+  margin-top: 15px;
+  margin-bottom: -5px;
+}
+
+.git-enhancer-data-header .subnav-links {
+  margin: 0 15px;
+}
+
+/* ---------------------------------- */
 /* addJiraAnchor & addJiraCopy */
 .jira-anchor {
   margin-right: 5px;

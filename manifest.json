@@ -12,6 +12,7 @@
       "matches": ["*://github.com/picmonkey/*"],
       "js": [
         "scripts/constants.js",
+        "scripts/helpers.js",
         "scripts/git_api.js",
         "scripts/git_pr/add_reviews_requested.js",
         "scripts/git_pr/add_jira_link.js",
@@ -23,9 +24,12 @@
       "matches": ["*://github.com/picmonkey/*"],
       "js": [
         "scripts/constants.js",
+        "scripts/helpers.js",
         "scripts/git_api.js",
+        "scripts/git_pulls/create_data_header.js",
         "scripts/git_pulls/create_data_footer.js",
         "scripts/git_pulls/add_reviews_data.js",
+        "scripts/git_pulls/add_reviews_filtering.js",
         "scripts/git_pulls/add_reviews_requested.js",
         "scripts/git_pulls/add_branch_data.js",
         "scripts/git_pulls/add_update_date.js",

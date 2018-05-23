@@ -10,16 +10,27 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         gitUpdateDate: false,
         gitReviews: false,
         gitReviewsRequested: false,
+        gitReviewsFiltering: false,
         pToken: '',
       },
-      ({ jiraAnchor, jiraCopy, gitBranchData, gitUpdateDate, gitReviews, gitReviewsRequested, pToken }) => {
+      ({
+        jiraAnchor,
+        jiraCopy,
+        gitBranchData,
+        gitUpdateDate,
+        gitReviews,
+        gitReviewsRequested,
+        gitReviewsFiltering,
+        pToken,
+      }) => {
         // ------------------------------
         // jira helpers
         jiraAnchor && addJiraAnchor();
         jiraCopy && addCopyBtnPR();
 
         // ------------------------------
-        // always add footer (its invisible unless filled)
+        // add meta fields for data
+        createDataHeader({ gitReviewsRequested, gitReviewsFiltering });
         createDataFooter({ gitBranchData, gitUpdateDate, gitReviews });
 
         // ------------------------------
@@ -54,6 +65,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // PR review requests call
         if (pToken.length && gitReviewsRequested) {
           gitReviewsRequested && addPullsReviewsRequested(pToken);
+        }
+
+        // ------------------------------
+        // Review filtering
+        if (pToken.length && gitReviewsFiltering) {
+          gitReviewsFiltering && addReviewsFiltering(pToken);
         }
       }
     );

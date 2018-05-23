@@ -26,8 +26,8 @@ function addPullsReviewsRequested(pToken) {
       newBtn.innerHTML = `Reviews <span class="git-review-notif-nbr">${reviewReq.length}</span>`;
 
       // insert into dom
-      const menuAnchor = document.getElementsByClassName('subnav-links')[0];
-      menuAnchor && menuAnchor.append(newBtn);
+      const headerAnchor = document.querySelectorAll(`.${dataHeaderClass}`)[0];
+      headerAnchor && headerAnchor.prepend(newBtn);
     });
   });
 }
