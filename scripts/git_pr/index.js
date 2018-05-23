@@ -5,9 +5,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     chrome.storage.sync.get(
       {
         jiraTitleLink: false,
+        gitReviewsRequested: false,
+        pToken: '',
       },
-      function({ jiraTitleLink }) {
+      function({ pToken, jiraTitleLink, gitReviewsRequested }) {
         jiraTitleLink && addJiraLink();
+
+        // ------------------------------
+        // PR review requests call
+        if (pToken.length && gitReviewsRequested) {
+          gitReviewsRequested && addPrReviewsRequested(pToken);
+        }
       }
     );
   }

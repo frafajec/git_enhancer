@@ -1,0 +1,19 @@
+/* ---------------------------------- */
+/* addReviewRequested */
+.git-review-notif-nbr {
+  border-radius: 20px;
+  border: 1px solid red;
+  padding: 2px 6px;
+  background: red;
+  color: white;
+}
+
+.git-pr-review-request {
+  height: 28px;
+  font-size: 12px;
+  padding: 3px 10px !important;
+}
+
+.git-pr-review-request span {
+  padding: 1px 4px;
+}

@@ -1,34 +1,4 @@
 // ------------------------------------------------------------------
-// constants
-const jiraNumberRegex = /([a-z0-9]{2,5}-\d{1,4})/gi;
-const jiraAnchorClass = 'jira-anchor';
-const copyBtnClass = 'jira-copy-issue';
-const dataFooterClass = 'git-enhancer-data-footer';
-const updateDateClass = 'git-update-date';
-const branchDataClass = 'git-branch-data';
-const reviewsClass = 'git-reviews';
-const prURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number';
-const reviewURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number/reviews';
-const seattleUsers = [
-  'pkenway',
-  'pconerly',
-  'planetcohen',
-  'bvandenbos',
-  'quasor',
-  'freya301',
-  'danarrington',
-  'ebrine',
-  'petercgrant',
-  'aparpar',
-  'jrhie',
-  'claudiecheng',
-  'danielle-j',
-  'picHeidi',
-  'scandeezy',
-  'TNorth22',
-];
-
-// ------------------------------------------------------------------
 // script subscription
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.git_pulls) {
@@ -39,12 +9,16 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         gitBranchData: false,
         gitUpdateDate: false,
         gitReviews: false,
+        gitReviewsRequested: false,
         pToken: '',
       },
-      ({ jiraAnchor, jiraCopy, gitBranchData, gitUpdateDate, gitReviews, pToken }) => {
+      ({ jiraAnchor, jiraCopy, gitBranchData, gitUpdateDate, gitReviews, gitReviewsRequested, pToken }) => {
+        // ------------------------------
+        // jira helpers
         jiraAnchor && addJiraAnchor();
         jiraCopy && addCopyBtnPR();
 
+        // ------------------------------
         // always add footer (its invisible unless filled)
         createDataFooter({ gitBranchData, gitUpdateDate, gitReviews });
 
@@ -73,11 +47,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // ------------------------------
         // PR review calls
         if (pToken.length && gitReviews) {
-          // Don't spam the API
-          const reviewAdded = document.getElementsByClassName(reviewsClass);
-          if (reviewAdded.length) return;
-
           gitReviews && addReviewsData(pToken);
+        }
+
+        // ------------------------------
+        // PR review requests call
+        if (pToken.length && gitReviewsRequested) {
+          gitReviewsRequested && addPullsReviewsRequested(pToken);
         }
       }
     );

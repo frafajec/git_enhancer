@@ -17,6 +17,10 @@ const REVIEW_ICON = {
 // ------------------------------------------------------------------
 // adds review status next to PR
 function addReviewsData(pToken) {
+  // Don't spam the API
+  const reviewAdded = document.getElementsByClassName(reviewsClass);
+  if (reviewAdded.length) return;
+
   // create individual user review icon
   const createUserReviewImg = state => {
     return `<img class="review-image" src="${REVIEW_ICON[state]}">`;

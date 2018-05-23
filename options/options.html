@@ -18,6 +18,12 @@
     #save {
         margin-top: 10px;
     }
+
+    #status {
+        display: inline-block;
+        width: auto;
+        margin-left: 10px;
+    }
 </style>
 
 <body>
@@ -46,11 +52,15 @@
     </label>
 
     <label>
+        <input type="checkbox" id="git-reviews-requested"> [Pulls] Review requests (*token)
+    </label>
+
+    <label>
         <input type="checkbox" id="jira-copy-issue"> [Pulls] Copy PR
     </label>
 
-    <div id="status"></div>
     <button id="save">Save</button>
+    <div id="status"></div>
 
     <script src="options.js"></script>
 </body>

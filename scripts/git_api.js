@@ -18,5 +18,9 @@ function gitApiCall(prURLs, pToken, callback) {
     });
   }
 
-  Promise.all(prURLs.map(url => request(url))).then(callback);
+  if (Array.isArray(prURLs)) {
+    Promise.all(prURLs.map(url => request(url))).then(callback);
+  } else {
+    request(prURLs).then(callback);
+  }
 }
