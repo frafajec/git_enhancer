@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "description": "PicMonkey/Parkside helper extension",
   "manifest_version": 2,
-  "permissions": ["tabs", "storage", "*://github.com/*", "webNavigation"],
+  "permissions": ["tabs", "storage", "*://github.com/*"],
   "background": {
     "scripts": ["background.js"]
   },
