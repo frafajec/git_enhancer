@@ -144,7 +144,7 @@ function addReviewsData(pToken) {
       // ------------------------------
       // insert in DOM
       const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${prID}"] .box-review`)[0];
-      anchor.appendChild(reviewsData);
+      anchor && anchor.appendChild(reviewsData);
     }
   });
 }

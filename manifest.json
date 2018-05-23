@@ -3,13 +3,13 @@
   "version": "1.0.4",
   "description": "PicMonkey/Parkside helper extension",
   "manifest_version": 2,
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage", "*://github.com/*", "webNavigation"],
   "background": {
     "scripts": ["background.js"]
   },
   "content_scripts": [
     {
-      "matches": ["https://github.com/picmonkey/picmonkey/pull/*"],
+      "matches": ["*://github.com/picmonkey/*"],
       "js": [
         "scripts/constants.js",
         "scripts/git_api.js",
@@ -20,7 +20,7 @@
       "css": ["styles/git_pr.css"]
     },
     {
-      "matches": ["https://github.com/picmonkey/picmonkey/pulls/*"],
+      "matches": ["*://github.com/picmonkey/*"],
       "js": [
         "scripts/constants.js",
         "scripts/git_api.js",

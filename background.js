@@ -18,28 +18,22 @@ function debounce(func, wait, immediate) {
 
 // ------------------------------------------------------------------
 // PicMonkey content script notificators
-const prUpdate = tab => {
+const prUpdate = debounce(tab => {
   chrome.tabs.sendMessage(tab.id, { git_pr_content: true });
-};
+}, 250);
 
-const pullsUpdate = tab => {
+const pullsUpdate = debounce(tab => {
   chrome.tabs.sendMessage(tab.id, { git_pulls: true });
-};
+}, 250);
 
 // ------------------------------------------------------------------
 // Tab listeners
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   // fire when loading is done + debounce
-  console.log(changeInfo, tab);
-  if (changeInfo.status === 'complete') {
-    // match specific PR
-    if (tab.url.match('https://github.com/picmonkey/picmonkey/pull/*')) {
-      // chrome.tabs.sendMessage(tab.id, { git_pr_content: true });
-      prUpdate(tab);
-    }
-    if (tab.url.match('https://github.com/picmonkey/picmonkey/pulls')) {
-      // chrome.tabs.sendMessage(tab.id, { git_pulls: true });
-      pullsUpdate(tab);
-    }
+  if (tab.url.match('https://github.com/picmonkey/picmonkey/pull/*')) {
+    prUpdate(tab);
+  }
+  if (tab.url.match('https://github.com/picmonkey/picmonkey/pulls')) {
+    pullsUpdate(tab);
   }
 });
