@@ -2,8 +2,8 @@
 // used as a placeholder for data poll
 function addReviewsFiltering(pToken) {
   // Don't spam the API
-  const reviewFiltering = document.getElementsByClassName(reviewsPullsFilteringClass);
-  if (reviewFiltering.length) return;
+  const reviewFilteringAdded = document.getElementsByClassName(reviewsPullsFilteringClass);
+  if (reviewFilteringAdded.length) return;
 
   // is:open is:pr label:"Code Complete" review:approved
   gitApiCall(
@@ -14,6 +14,10 @@ function addReviewsFiltering(pToken) {
       const reviewURLs = reviewIDs.map(prID => reviewURL.replace('$pr_number', prID));
 
       gitApiCall(reviewURLs, pToken, res => {
+        // verify not yet added
+        const reviewFilteringAdded = document.getElementsByClassName(reviewsPullsFilteringClass);
+        if (reviewFilteringAdded.length) return;
+
         // combine PRs and reviews
         const prReviews = {};
         for (let i = 0; i < reviewIDs.length; i++) {

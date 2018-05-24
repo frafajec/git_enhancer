@@ -1,8 +1,6 @@
 // ------------------------------------------------------------------
 // adds Jira issue link next to PR
 function addJiraAnchor() {
-  const jiraIconSrc = chrome.extension.getURL('assets/jira-icon.png');
-
   function insertAnchor(anchor, title) {
     if (!title) return null;
 
@@ -20,10 +18,11 @@ function addJiraAnchor() {
       anchor.parentNode.insertBefore(jiraAnchor, anchor);
     }
   }
-  const issueList = document.getElementsByClassName('js-issue-row');
-  const replaced = document.getElementsByClassName(jiraAnchorClass);
 
-  if (replaced.length === 0) {
+  const alreadyAdded = document.getElementsByClassName(jiraAnchorClass);
+  if (alreadyAdded.length === 0) {
+    const issueList = document.getElementsByClassName('js-issue-row');
+
     for (let i = 0; i < issueList.length; i++) {
       const jiraTitle = issueList[i].querySelectorAll('.js-navigation-open')[0];
       // could be multiple issues

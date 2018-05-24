@@ -1,8 +1,8 @@
 // ------------------------------------------------------------------
 // used as a placeholder for data poll
 function createDataFooter({ gitBranchData, gitUpdateDate, gitReviews }) {
-  const footer = document.getElementsByClassName(dataFooterClass);
-  if (footer.length) return;
+  const footerAdded = document.getElementsByClassName(dataFooterClass);
+  if (footerAdded.length) return;
 
   const issueList = document.getElementsByClassName('js-issue-row');
   for (let i = 0; i < issueList.length; i++) {

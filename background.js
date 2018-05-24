@@ -16,24 +16,25 @@ function debounce(func, wait, immediate) {
   };
 }
 
+const debounceTime = 300;
 // ------------------------------------------------------------------
 // PicMonkey content script notificators
-const prUpdate = debounce(tab => {
-  chrome.tabs.sendMessage(tab.id, { git_pr_content: true });
-}, 250);
+const prUpdate = debounce(tabID => {
+  chrome.tabs.sendMessage(tabID, { git_pr: true });
+}, debounceTime);
 
-const pullsUpdate = debounce(tab => {
-  chrome.tabs.sendMessage(tab.id, { git_pulls: true });
-}, 250);
+const pullsUpdate = debounce(tabID => {
+  chrome.tabs.sendMessage(tabID, { git_pulls: true });
+}, debounceTime);
 
 // ------------------------------------------------------------------
 // Tab listeners
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab) {
   // fire when loading is done + debounce
   if (tab.url.match('https://github.com/picmonkey/picmonkey/pull/*')) {
-    prUpdate(tab);
+    prUpdate(tabID);
   }
   if (tab.url.match('https://github.com/picmonkey/picmonkey/pulls')) {
-    pullsUpdate(tab);
+    pullsUpdate(tabID);
   }
 });

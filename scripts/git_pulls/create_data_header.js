@@ -1,8 +1,8 @@
 // ------------------------------------------------------------------
 // used as a placeholder for data poll
 function createDataHeader({ gitReviewsRequested, gitReviewsFiltering }) {
-  const headerExists = document.getElementsByClassName(dataHeaderClass);
-  if (headerExists.length) return;
+  const headerAdded = document.getElementsByClassName(dataHeaderClass);
+  if (headerAdded.length) return;
 
   const anchor = document.querySelectorAll('.issues-listing .subnav')[0];
 

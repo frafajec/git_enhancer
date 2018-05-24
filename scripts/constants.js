@@ -51,3 +51,6 @@ const REVIEW_ICON = {
   [REVIEW_STATE.COMMENTED]: chrome.extension.getURL('assets/comment.png'),
   [REVIEW_STATE.DISMISSED]: chrome.extension.getURL('assets/dismissed.png'),
 };
+
+const copyIconSrc = chrome.extension.getURL('assets/copy.png');
+const jiraIconSrc = chrome.extension.getURL('assets/jira-icon.png');

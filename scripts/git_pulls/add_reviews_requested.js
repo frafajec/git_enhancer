@@ -13,6 +13,10 @@ function addPullsReviewsRequested(pToken) {
     gitApiCall(userReviewsURL, pToken, reviewsRequested => {
       const reviewReq = [];
 
+      // verify not yet added
+      const reviewAdded = document.getElementsByClassName(reviewsPullsRequestedClass);
+      if (reviewAdded.length) return;
+
       // validate review URL (that comes from picmonkey)
       reviewsRequested.items.forEach(review => {
         if (review.url.match('repos/picmonkey/picmonkey')) {

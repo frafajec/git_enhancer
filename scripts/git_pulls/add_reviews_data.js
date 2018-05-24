@@ -26,6 +26,10 @@ function addReviewsData(pToken) {
 
   // ------------------------------------------------------
   gitApiCall(reviewURLs, pToken, res => {
+    // verify still not added
+    const reviewAdded = document.getElementsByClassName(reviewsClass);
+    if (reviewAdded.length) return;
+
     // combine PRs and reviews
     const prReviews = {};
     for (let i = 0; i < reviewIDs.length; i++) {
