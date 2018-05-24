@@ -8,6 +8,7 @@ function save_options() {
   const gitUpdateDate = document.getElementById('git-update-date').checked;
   const gitReviews = document.getElementById('git-reviews').checked;
   const gitReviewsRequested = document.getElementById('git-reviews-requested').checked;
+  const gitReviewsChanges = document.getElementById('git-reviews-changes').checked;
   const gitReviewsFiltering = document.getElementById('git-reviews-filtering').checked;
   const jiraCopy = document.getElementById('jira-copy-issue').checked;
 
@@ -21,6 +22,7 @@ function save_options() {
       gitUpdateDate,
       gitReviews,
       gitReviewsRequested,
+      gitReviewsChanges,
       gitReviewsFiltering,
     },
     function() {
@@ -45,6 +47,7 @@ function restore_options() {
       gitUpdateDate: false,
       gitReviews: false,
       gitReviewsRequested: false,
+      gitReviewsChanges: false,
       gitReviewsFiltering: false,
       jiraCopy: false,
     },
@@ -56,6 +59,7 @@ function restore_options() {
       document.getElementById('git-update-date').checked = items.gitUpdateDate;
       document.getElementById('git-reviews').checked = items.gitReviews;
       document.getElementById('git-reviews-requested').checked = items.gitReviewsRequested;
+      document.getElementById('git-reviews-changes').checked = items.gitReviewsChanges;
       document.getElementById('git-reviews-filtering').checked = items.gitReviewsFiltering;
       document.getElementById('jira-copy-issue').checked = items.jiraCopy;
     }

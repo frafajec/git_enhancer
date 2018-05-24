@@ -6,15 +6,22 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       {
         jiraTitleLink: false,
         gitReviewsRequested: false,
+        gitReviewsChanges: false,
         pToken: '',
       },
-      function({ pToken, jiraTitleLink, gitReviewsRequested }) {
+      function({ pToken, jiraTitleLink, gitReviewsRequested, gitReviewsChanges }) {
         jiraTitleLink && addJiraLink();
 
         // ------------------------------
         // PR review requests call
         if (pToken.length && gitReviewsRequested) {
-          gitReviewsRequested && addPrReviewsRequested(pToken);
+          addPrReviewsRequested(pToken);
+        }
+
+        // ------------------------------
+        // PR review changes call
+        if (pToken.length && gitReviewsChanges) {
+          addPrChangesRequested(pToken);
         }
       }
     );

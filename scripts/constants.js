@@ -9,14 +9,17 @@ const dataHeaderClass = 'git-enhancer-data-header';
 const updateDateClass = 'git-update-date';
 const branchDataClass = 'git-branch-data';
 const reviewsClass = 'git-reviews';
-const reviewsPullsRequestedClass = 'git-pulls-review-request';
 const reviewsPullsFilteringClass = 'git-pulls-review-filtering';
+const reviewsPullsChangesRequested = 'git-pulls-review-changes';
+const reviewsPullsRequestedClass = 'git-pulls-review-request';
 const reviewsPrRequestedClass = 'git-pr-review-request';
+const reviewsPrChangesRequested = 'git-pr-review-changes';
 
 const userURL = 'https://api.github.com/user';
 const prURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number';
 const reviewURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number/reviews';
 const reviewRequestedURL = 'https://api.github.com/search/issues?q=is:open+is:pr+review-requested:$user';
+const reviewChangesURL = 'https://api.github.com/search/issues?q=is:open+is:pr+review:changes-requested+author:$user';
 const seattleUsers = [
   'pkenway',
   'pconerly',

@@ -1,20 +1,22 @@
 // ------------------------------------------------------------------
 // Adds anchor with number of requested reviews
-function addPullsReviewsRequested(pToken) {
+function addChangesRequested(pToken) {
   // Don't spam the API
-  const reviewAdded = document.getElementsByClassName(reviewsPullsRequestedClass);
+  const reviewAdded = document.getElementsByClassName(reviewsPullsChangesRequested);
   if (reviewAdded.length) return;
 
   gitApiCall(userURL, pToken, user => {
     const currentUser = user.login;
-    const userReviewsURL = reviewRequestedURL.replace('$user', currentUser);
-    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+is:open+review-requested:${currentUser}`;
+    const userReviewsURL = reviewChangesURL.replace('$user', currentUser);
+
+    // is:open is:pr review:changes-requested author:<user_name>
+    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+review:changes-requested+is:open+author:${currentUser}`;
 
     gitApiCall(userReviewsURL, pToken, reviewsRequested => {
       const reviewReq = [];
 
       // verify not yet added
-      const reviewAdded = document.getElementsByClassName(reviewsPullsRequestedClass);
+      const reviewAdded = document.getElementsByClassName(reviewsPullsChangesRequested);
       if (reviewAdded.length) return;
 
       // validate review URL (that comes from picmonkey)
@@ -25,14 +27,14 @@ function addPullsReviewsRequested(pToken) {
       });
 
       const newBtn = document.createElement('a');
-      newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPullsRequestedClass}`);
+      newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPullsChangesRequested}`);
       newBtn.setAttribute('href', userReviewsAnchor);
       newBtn.innerHTML =
-        'Reviews ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
+        'Changes req. ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
 
       // insert into dom
       const headerAnchor = document.querySelectorAll(`.${dataHeaderClass}`)[0];
-      headerAnchor && headerAnchor.prepend(newBtn);
+      headerAnchor && headerAnchor.append(newBtn);
     });
   });
 }

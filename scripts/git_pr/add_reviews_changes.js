@@ -1,22 +1,22 @@
 // ------------------------------------------------------------------
 // Adds anchor with number of requested reviews
-function addPrReviewsRequested(pToken) {
+function addPrChangesRequested(pToken) {
   // Don't spam the API
-  const reviewAdded = document.getElementsByClassName(reviewsPrRequestedClass);
+  const reviewAdded = document.getElementsByClassName(reviewsPrChangesRequested);
   if (reviewAdded.length) return;
 
-  // call to get current user
   gitApiCall(userURL, pToken, user => {
     const currentUser = user.login;
-    const userReviewsURL = reviewRequestedURL.replace('$user', currentUser);
-    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+is:open+review-requested:${currentUser}`;
+    const userReviewsURL = reviewChangesURL.replace('$user', currentUser);
 
-    // collect all review requests for current user
+    // is:open is:pr review:changes-requested author:<user_name>
+    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+review:changes-requested+is:open+author:${currentUser}`;
+
     gitApiCall(userReviewsURL, pToken, reviewsRequested => {
       const reviewReq = [];
 
-      // prevent double adding
-      const reviewAdded = document.getElementsByClassName(reviewsPrRequestedClass);
+      // verify not yet added
+      const reviewAdded = document.getElementsByClassName(reviewsPrChangesRequested);
       if (reviewAdded.length) return;
 
       // validate review URL (that comes from picmonkey)
@@ -26,11 +26,11 @@ function addPrReviewsRequested(pToken) {
         }
       });
 
-      // create review button
       const newBtn = document.createElement('a');
-      newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPrRequestedClass}`);
+      newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPrChangesRequested}`);
       newBtn.setAttribute('href', userReviewsAnchor);
-      newBtn.innerHTML = `Reviews <span class="git-review-notif-nbr">${reviewReq.length}</span>`;
+      newBtn.innerHTML =
+        'Changes req. ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
 
       // add to DOM
       const menuAnchor = document.getElementsByClassName('gh-header-actions')[0];

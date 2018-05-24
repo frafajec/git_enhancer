@@ -8,12 +8,14 @@
   color: white;
 }
 
-.git-pr-review-request {
+.git-pr-review-request,
+.git-pr-review-changes {
   height: 28px;
   font-size: 12px;
   padding: 3px 10px !important;
 }
 
-.git-pr-review-request span {
+.git-pr-review-request span,
+.git-pr-review-changes span {
   padding: 0 4px;
 }

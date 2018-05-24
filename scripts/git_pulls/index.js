@@ -11,6 +11,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         gitReviews: false,
         gitReviewsRequested: false,
         gitReviewsFiltering: false,
+        gitReviewsChanges: false,
         pToken: '',
       },
       ({
@@ -21,6 +22,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         gitReviews,
         gitReviewsRequested,
         gitReviewsFiltering,
+        gitReviewsChanges,
         pToken,
       }) => {
         // ------------------------------
@@ -30,7 +32,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
         // ------------------------------
         // add meta fields for data
-        createDataHeader({ gitReviewsRequested, gitReviewsFiltering });
+        createDataHeader({ gitReviewsRequested, gitReviewsFiltering, gitReviewsChanges });
         createDataFooter({ gitBranchData, gitUpdateDate, gitReviews });
 
         // ------------------------------
@@ -71,6 +73,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // Review filtering
         if (pToken.length && gitReviewsFiltering) {
           gitReviewsFiltering && addReviewsFiltering(pToken);
+        }
+
+        // ------------------------------
+        // Review changes on own PRs
+        if (pToken.length && gitReviewsFiltering) {
+          gitReviewsChanges && addChangesRequested(pToken);
         }
       }
     );
