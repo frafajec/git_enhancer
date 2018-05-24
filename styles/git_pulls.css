@@ -25,7 +25,11 @@
 }
 
 .git-enhancer-data-header .subnav-links {
-  margin: 0 15px;
+  margin-left: 10px;
+}
+
+.git-enhancer-data-header .subnav-links:first-of-type {
+  margin: 0;
 }
 
 /* ---------------------------------- */

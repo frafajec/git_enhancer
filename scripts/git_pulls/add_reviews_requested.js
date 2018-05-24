@@ -31,7 +31,7 @@ function addPullsReviewsRequested(pToken) {
         'Reviews ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
 
       // insert into dom
-      const headerAnchor = document.querySelectorAll(`.${dataHeaderClass}`)[0];
+      const headerAnchor = document.querySelectorAll(`.${dataHeaderClass} .box-requested`)[0];
       headerAnchor && headerAnchor.prepend(newBtn);
     });
   });

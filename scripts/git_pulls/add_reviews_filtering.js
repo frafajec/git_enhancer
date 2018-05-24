@@ -65,7 +65,7 @@ function addReviewsFiltering(pToken) {
         btnReviewed.innerHTML = 'QA review';
 
         // insert into dom
-        const headerAnchor = document.querySelectorAll(`.${dataHeaderClass} .subnav-links`)[0];
+        const headerAnchor = document.querySelectorAll(`.${dataHeaderClass} .box-filtering`)[0];
         if (!headerAnchor) return;
 
         headerAnchor.appendChild(btnSeattleQA);

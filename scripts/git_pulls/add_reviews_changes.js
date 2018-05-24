@@ -33,7 +33,7 @@ function addChangesRequested(pToken) {
         'Changes req. ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
 
       // insert into dom
-      const headerAnchor = document.querySelectorAll(`.${dataHeaderClass}`)[0];
+      const headerAnchor = document.querySelectorAll(`.${dataHeaderClass} .box-changes`)[0];
       headerAnchor && headerAnchor.append(newBtn);
     });
   });
