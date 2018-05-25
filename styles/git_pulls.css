@@ -39,14 +39,14 @@
 }
 
 .jira-anchor img {
-  width: 17px;
-  height: 17px;
+  width: 16px;
+  height: 16px;
   margin-bottom: -4px;
 }
 
 .jira-copy-issue {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   margin-bottom: -4px;
   cursor: pointer;
 }
