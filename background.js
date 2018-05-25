@@ -31,10 +31,10 @@ const pullsUpdate = debounce(tabID => {
 // Tab listeners
 chrome.tabs.onUpdated.addListener(function(tabID, changeInfo, tab) {
   // fire when loading is done + debounce
-  if (tab.url.match('https://github.com/picmonkey/picmonkey/pull/*')) {
+  if (tab.url.match(/github.com\/picmonkey\/(.*?)\/pull\b/)) {
     prUpdate(tabID);
   }
-  if (tab.url.match('https://github.com/picmonkey/picmonkey/pulls')) {
+  if (tab.url.match(/github.com\/picmonkey\/(.*?)\/pulls/)) {
     pullsUpdate(tabID);
   }
 });

@@ -76,3 +76,51 @@ function getReviewStates(reviews) {
     psideReview: { reviews: reviewsPside, state: reviewPsideState },
   };
 }
+
+// ------------------------------
+// generate URL for PR review overview
+function getReviewRequestedURL(user, reviews = []) {
+  let url = '';
+
+  // go through repos and see if there is reviews from multiple repos
+  const repos = {};
+  for (i in reviews) {
+    const match = reviews[i].url.match(/repos\/picmonkey\/(.*?)\//);
+    if (match.length >= 2 && !repos[match[1]]) repos[match[1]] = true;
+  }
+
+  // handle URL assigning
+  if (Object.keys(repos).length > 1) {
+    // redirect to user PR overall
+    url = `/pulls?q=is:open+is:pr+user:picmonkey+review-requested:${user}`;
+  } else {
+    const repo = Object.keys(repos)[0];
+    url = `/picmonkey/${repo}/issues?q=is:pr+is:open+review-requested:${user}`;
+  }
+
+  return url;
+}
+
+// ------------------------------
+// generate URL for PR review overview
+function getReviewChangesURL(user, reviews = []) {
+  let url = '';
+
+  // go through repos and see if there is reviews from multiple repos
+  const repos = {};
+  for (i in reviews) {
+    const match = reviews[i].url.match(/repos\/picmonkey\/(.*?)\//);
+    if (match.length >= 2 && !repos[match[1]]) repos[match[1]] = true;
+  }
+
+  // handle URL assigning
+  if (Object.keys(repos).length > 1) {
+    // redirect to user PR overall
+    url = `/pulls?q=is:open+is:pr+user:picmonkey+author:${user}+review:changes-requested`;
+  } else {
+    const repo = Object.keys(repos)[0];
+    url = `/picmonkey/${repo}/issues?q=is:pr+is:open+author:${user}+review:changes-requested`;
+  }
+
+  return url;
+}

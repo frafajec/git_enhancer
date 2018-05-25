@@ -8,7 +8,6 @@ function addPullsReviewsRequested(pToken) {
   gitApiCall(userURL, pToken, user => {
     const currentUser = user.login;
     const userReviewsURL = reviewRequestedURL.replace('$user', currentUser);
-    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+is:open+review-requested:${currentUser}`;
 
     gitApiCall(userReviewsURL, pToken, reviewsRequested => {
       const reviewReq = [];
@@ -19,14 +18,14 @@ function addPullsReviewsRequested(pToken) {
 
       // validate review URL (that comes from picmonkey)
       reviewsRequested.items.forEach(review => {
-        if (review.url.match('repos/picmonkey/picmonkey')) {
+        if (review.url.match('repos/picmonkey')) {
           reviewReq.push(review);
         }
       });
 
       const newBtn = document.createElement('a');
       newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPullsRequestedClass}`);
-      newBtn.setAttribute('href', userReviewsAnchor);
+      newBtn.setAttribute('href', getReviewRequestedURL(currentUser, reviewReq));
       newBtn.innerHTML =
         'Reviews ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
 

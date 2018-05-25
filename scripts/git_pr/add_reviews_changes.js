@@ -9,9 +9,6 @@ function addPrChangesRequested(pToken) {
     const currentUser = user.login;
     const userReviewsURL = reviewChangesURL.replace('$user', currentUser);
 
-    // is:open is:pr review:changes-requested author:<user_name>
-    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+review:changes-requested+is:open+author:${currentUser}`;
-
     gitApiCall(userReviewsURL, pToken, reviewsRequested => {
       const reviewReq = [];
 
@@ -28,7 +25,7 @@ function addPrChangesRequested(pToken) {
 
       const newBtn = document.createElement('a');
       newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPrChangesRequested}`);
-      newBtn.setAttribute('href', userReviewsAnchor);
+      newBtn.setAttribute('href', getReviewChangesURL(currentUser, reviewReq));
       newBtn.innerHTML =
         'Changes req. ' + (reviewReq.length ? `<span class="git-review-notif-nbr">${reviewReq.length}</span>` : '');
 

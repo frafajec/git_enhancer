@@ -9,7 +9,6 @@ function addPrReviewsRequested(pToken) {
   gitApiCall(userURL, pToken, user => {
     const currentUser = user.login;
     const userReviewsURL = reviewRequestedURL.replace('$user', currentUser);
-    const userReviewsAnchor = `/picmonkey/picmonkey/issues?q=is:pr+is:open+review-requested:${currentUser}`;
 
     // collect all review requests for current user
     gitApiCall(userReviewsURL, pToken, reviewsRequested => {
@@ -29,7 +28,7 @@ function addPrReviewsRequested(pToken) {
       // create review button
       const newBtn = document.createElement('a');
       newBtn.setAttribute('class', `js-selected-nativation-item subnav-item ${reviewsPrRequestedClass}`);
-      newBtn.setAttribute('href', userReviewsAnchor);
+      newBtn.setAttribute('href', getReviewRequestedURL(currentUser, reviewReq));
       newBtn.innerHTML = `Reviews <span class="git-review-notif-nbr">${reviewReq.length}</span>`;
 
       // add to DOM
