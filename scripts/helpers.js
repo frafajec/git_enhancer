@@ -85,17 +85,23 @@ function getReviewRequestedURL(user, reviews = []) {
   // go through repos and see if there is reviews from multiple repos
   const repos = {};
   for (i in reviews) {
-    const match = reviews[i].url.match(/repos\/picmonkey\/(.*?)\//);
+    const match = reviews[i].url.match(repoRegex);
     if (match.length >= 2 && !repos[match[1]]) repos[match[1]] = true;
   }
 
   // handle URL assigning
-  if (Object.keys(repos).length > 1) {
-    // redirect to user PR overall
-    url = `/pulls?q=is:open+is:pr+user:picmonkey+review-requested:${user}`;
-  } else {
+  if (Object.keys(repos).length === 0) {
+    const repo = window.location.href.match(locationRepoRegex);
+    url =
+      repo.length > 1
+        ? `/picmonkey/${repo[1]}/issues?q=is:pr+is:open+review-requested:${user}`
+        : `/picmonkey/picmonkey/issues?q=is:pr+is:open+review-requested:${user}`;
+  } else if (Object.keys(repos).length === 1) {
     const repo = Object.keys(repos)[0];
     url = `/picmonkey/${repo}/issues?q=is:pr+is:open+review-requested:${user}`;
+  } else {
+    // redirect to user PR overall
+    url = `/pulls?q=is:open+is:pr+user:picmonkey+review-requested:${user}`;
   }
 
   return url;
@@ -109,18 +115,57 @@ function getReviewChangesURL(user, reviews = []) {
   // go through repos and see if there is reviews from multiple repos
   const repos = {};
   for (i in reviews) {
-    const match = reviews[i].url.match(/repos\/picmonkey\/(.*?)\//);
+    const match = reviews[i].url.match(repoRegex);
     if (match.length >= 2 && !repos[match[1]]) repos[match[1]] = true;
   }
 
   // handle URL assigning
-  if (Object.keys(repos).length > 1) {
-    // redirect to user PR overall
-    url = `/pulls?q=is:open+is:pr+user:picmonkey+author:${user}+review:changes-requested`;
-  } else {
+  if (Object.keys(repos).length === 0) {
+    const repo = window.location.href.match(locationRepoRegex);
+    url =
+      repo.length > 1
+        ? `/picmonkey/${repo[1]}/issues?q=is:pr+is:open+author:${user}+review:changes-requested`
+        : `/picmonkey/picmonkey/issues?q=is:pr+is:open+author:${user}+review:changes-requested`;
+  } else if (Object.keys(repos).length === 1) {
     const repo = Object.keys(repos)[0];
     url = `/picmonkey/${repo}/issues?q=is:pr+is:open+author:${user}+review:changes-requested`;
+  } else {
+    // redirect to user PR overall
+    url = `/pulls?q=is:open+is:pr+user:picmonkey+author:${user}+review:changes-requested`;
   }
 
   return url;
+}
+
+// ------------------------------
+// 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number/reviews';
+// generate URL for review calls
+function getReviewURL(prID) {
+  const repo = window.location.href.match(locationRepoRegex);
+  return repo.length > 1
+    ? `https://api.github.com/repos/picmonkey/${repo[1]}/pulls/${prID}/reviews`
+    : `https://api.github.com/repos/picmonkey/picmonkey/pulls/${prID}/reviews`;
+}
+
+// ------------------------------
+// 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number';
+// generate URL for review calls
+function getPRURL(prID) {
+  const repo = window.location.href.match(locationRepoRegex);
+  return repo.length > 1
+    ? `https://api.github.com/repos/picmonkey/${repo[1]}/pulls/${prID}`
+    : `https://api.github.com/repos/picmonkey/picmonkey/pulls/${prID}`;
+}
+
+function getReviewFilteringURL() {
+  const endpoint = 'https://api.github.com/search/issues?q=is:open+is:pr+review:approved+label:"Code complete"';
+  const repo = window.location.href.match(locationRepoRegex);
+  return repo.length > 1 ? `${endpoint}+repo:picmonkey/${repo[1]}` : endpoint;
+}
+
+function getReviewFilteringHref(prIDs) {
+  const repo = window.location.href.match(locationRepoRegex);
+  return repo.length > 1
+    ? `/picmonkey/${repo[1]}/issues?q=is:pr+is:open+${prIDs}`
+    : `/picmonkey/picmonkey/issues?q=is:pr+is:open+${prIDs}`;
 }

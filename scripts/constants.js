@@ -1,6 +1,8 @@
 // ------------------------------------------------------------------
 // constants
 const jiraNumberRegex = /([a-z0-9]{2,5}-\d{1,4})/gi;
+const repoRegex = /repos\/picmonkey\/(.*?)\//;
+const locationRepoRegex = /github.com\/picmonkey\/(.*?)\//;
 
 const jiraAnchorClass = 'jira-anchor';
 const copyBtnClass = 'jira-copy-issue';
@@ -16,8 +18,6 @@ const reviewsPrRequestedClass = 'git-pr-review-request';
 const reviewsPrChangesRequested = 'git-pr-review-changes';
 
 const userURL = 'https://api.github.com/user';
-const prURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number';
-const reviewURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number/reviews';
 const reviewRequestedURL = 'https://api.github.com/search/issues?q=is:open+is:pr+review-requested:$user';
 const reviewChangesURL = 'https://api.github.com/search/issues?q=is:open+is:pr+review:changes-requested+author:$user';
 const seattleUsers = [

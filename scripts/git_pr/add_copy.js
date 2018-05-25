@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------
 // QA help - adds copy issue btn
-function addCopyBtnPulls() {
+function addCopyBtnPR() {
   function insertBtn(anchor, jiraNumber, copyString) {
     function copyToClipboard() {
       navigator.clipboard.writeText(copyString);
@@ -17,16 +17,13 @@ function addCopyBtnPulls() {
 
   const alreadyAdded = document.getElementsByClassName(copyBtnClass);
   if (alreadyAdded.length === 0) {
-    const issueList = document.getElementsByClassName('js-issue-row');
-    for (let i = 0; i < issueList.length; i++) {
-      const jiraTitle = issueList[i].querySelectorAll('.js-navigation-open')[0];
-      const jiraNumber = jiraTitle.innerHTML.match(jiraNumberRegex);
-      const prNumber = issueList[i].querySelectorAll('.opened-by')[0].innerText.match(/#\d{1,4}/)[0];
+    const jiraTitle = document.querySelectorAll('.gh-header-title .js-issue-title')[0];
+    const prNumber = document.querySelectorAll('.gh-header-number')[0].innerHTML;
 
-      // [V3-123] text - URL
-      const copyString = `${jiraTitle.innerHTML.trim().replace(jiraNumberRegex, `[${jiraNumber} / ${prNumber}]`)}`;
+    const jiraNumber = jiraTitle.innerHTML.match(jiraNumberRegex);
+    // [V3-123 / #1234] text
+    const copyString = `${jiraTitle.innerHTML.trim().replace(jiraNumberRegex, `[${jiraNumber} / ${prNumber}]`)}`;
 
-      insertBtn(jiraTitle, jiraNumber, copyString);
-    }
+    insertBtn(jiraTitle, jiraNumber, copyString);
   }
 }

@@ -27,7 +27,7 @@ function addUpdateDate(pullList) {
 
     const updateDate = document.createElement('span');
     updateDate.setAttribute('class', updateDateClass);
-    updateDate.innerHTML = `Updated ${lastUpdated}`;
+    updateDate.innerHTML = `Updated <strong>${lastUpdated}</strong>`;
 
     const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${pr.number}"] .box-date`)[0];
     anchor.appendChild(updateDate);

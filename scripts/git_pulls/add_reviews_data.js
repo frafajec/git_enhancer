@@ -19,7 +19,7 @@ function addReviewsData(pToken) {
     // only collect where there is review and is open
     if (!merged && !closed) {
       const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi)[0];
-      reviewURLs.push(reviewURL.replace('$pr_number', prID));
+      reviewURLs.push(getReviewURL(prID));
       reviewIDs.push(prID);
     }
   }

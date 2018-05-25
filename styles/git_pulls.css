@@ -52,6 +52,16 @@
 }
 
 /* ---------------------------------- */
+/* git hbranch data */
+.git-branch-data strong {
+  font-size: 13px;
+}
+
+.git-update-date strong {
+  font-size: 13px;
+}
+
+/* ---------------------------------- */
 /* addReviewsData */
 .git-reviews {
   display: inline-block;

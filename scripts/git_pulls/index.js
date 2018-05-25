@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // ------------------------------
         // jira helpers
         jiraAnchor && addJiraAnchor();
-        jiraCopy && addCopyBtnPR();
+        jiraCopy && addCopyBtnPulls();
 
         // ------------------------------
         // add meta fields for data
@@ -48,7 +48,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
           const prURLs = [];
           for (let i = 0; i < issueList.length; i++) {
             const prID = issueList[i].getAttribute('id').match(/(?<=issue_).*/gi)[0];
-            prURLs.push(prURL.replace('$pr_number', prID));
+            prURLs.push(getPRURL(prID));
           }
 
           gitApiCall(prURLs, pToken, pullList => {

@@ -19,3 +19,10 @@
 .git-pr-review-changes span {
   padding: 0 4px;
 }
+
+.gh-header-show .jira-copy-issue {
+  padding: 2px;
+  width: 27px;
+  height: 27px;
+  margin-bottom: -2px;
+}

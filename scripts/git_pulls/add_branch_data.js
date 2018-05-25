@@ -13,7 +13,7 @@ function addBranchData(pullList) {
 
     const branchData = document.createElement('span');
     branchData.setAttribute('class', branchDataClass);
-    branchData.innerHTML = `${pr.head.ref} -> ${pr.base.ref}`;
+    branchData.innerHTML = `${pr.head.ref} -> <strong>${pr.base.ref}</strong>`;
 
     const anchor = document.querySelectorAll(`div.${dataFooterClass}[data-id="${pr.number}"] .box-branch`)[0];
     anchor.appendChild(branchData);
