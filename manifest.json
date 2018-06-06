@@ -3,26 +3,39 @@
   "version": "1.0.6",
   "description": "PicMonkey/Parkside helper extension",
   "manifest_version": 2,
-  "permissions": ["tabs", "storage", "*://github.com/*"],
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://github.com/*"
+  ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
-      "matches": ["*://github.com/picmonkey/*"],
+      "matches": [
+        "*://github.com/picmonkey/*"
+      ],
       "js": [
         "scripts/constants.js",
         "scripts/helpers.js",
         "scripts/git_api.js",
+        "scripts/git_pr/add_code_stats.js",
         "scripts/git_pr/add_reviews_requested.js",
         "scripts/git_pr/add_reviews_changes.js",
         "scripts/git_pr/add_jira_link.js",
         "scripts/git_pr/index.js"
       ],
-      "css": ["styles/git_pr.css"]
+      "css": [
+        "styles/git_pr.css"
+      ]
     },
     {
-      "matches": ["*://github.com/picmonkey/*"],
+      "matches": [
+        "*://github.com/picmonkey/*"
+      ],
       "js": [
         "scripts/constants.js",
         "scripts/helpers.js",
@@ -39,10 +52,14 @@
         "scripts/git_pulls/add_jira_anchor.js",
         "scripts/git_pulls/index.js"
       ],
-      "css": ["styles/git_pulls.css"]
+      "css": [
+        "styles/git_pulls.css"
+      ]
     }
   ],
-  "web_accessible_resources": ["assets/*"],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
   "options_ui": {
     "page": "options/options.html",
     "open_in_tab": false

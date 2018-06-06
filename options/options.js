@@ -10,6 +10,7 @@ function save_options() {
   const gitReviewsRequested = document.getElementById('git-reviews-requested').checked;
   const gitReviewsChanges = document.getElementById('git-reviews-changes').checked;
   const gitReviewsFiltering = document.getElementById('git-reviews-filtering').checked;
+  const gitFileStats = document.getElementById('git-file-stats').checked;
   const jiraCopy = document.getElementById('jira-copy-issue').checked;
 
   chrome.storage.sync.set(
@@ -24,6 +25,7 @@ function save_options() {
       gitReviewsRequested,
       gitReviewsChanges,
       gitReviewsFiltering,
+      gitFileStats,
     },
     function() {
       // Update status to let user know options were saved.
@@ -49,6 +51,7 @@ function restore_options() {
       gitReviewsRequested: false,
       gitReviewsChanges: false,
       gitReviewsFiltering: false,
+      gitFileStats: false,
       jiraCopy: false,
     },
     function(items) {
@@ -61,6 +64,7 @@ function restore_options() {
       document.getElementById('git-reviews-requested').checked = items.gitReviewsRequested;
       document.getElementById('git-reviews-changes').checked = items.gitReviewsChanges;
       document.getElementById('git-reviews-filtering').checked = items.gitReviewsFiltering;
+      document.getElementById('git-file-stats').checked = items.gitFileStats;
       document.getElementById('jira-copy-issue').checked = items.jiraCopy;
     }
   );
