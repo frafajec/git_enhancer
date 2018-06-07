@@ -8,9 +8,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         jiraTitleLink: false,
         gitReviewsRequested: false,
         gitReviewsChanges: false,
+        gitFileStats: false,
         pToken: '',
       },
-      function({ pToken, jiraCopy, jiraTitleLink, gitReviewsRequested, gitReviewsChanges }) {
+      function({ pToken, jiraCopy, jiraTitleLink, gitReviewsRequested, gitReviewsChanges, gitFileStats }) {
         jiraCopy && addCopyBtnPR();
         jiraTitleLink && addJiraLink();
 
@@ -24,6 +25,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         // PR review changes call
         if (pToken.length && gitReviewsChanges) {
           addPrChangesRequested(pToken);
+        }
+
+        if (pToken.length && gitFileStats) {
+          addCodeStats(pToken);
         }
       }
     );

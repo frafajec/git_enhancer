@@ -20,6 +20,7 @@ const reviewsPrChangesRequested = 'git-pr-review-changes';
 const userURL = 'https://api.github.com/user';
 const reviewRequestedURL = 'https://api.github.com/search/issues?q=is:open+is:pr+review-requested:$user';
 const reviewChangesURL = 'https://api.github.com/search/issues?q=is:open+is:pr+review:changes-requested+author:$user';
+const filesURL = 'https://api.github.com/repos/picmonkey/picmonkey/pulls/$pr_number/files?page=$page';
 const seattleUsers = [
   'pkenway',
   'pconerly',
