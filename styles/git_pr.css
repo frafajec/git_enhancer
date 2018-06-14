@@ -26,3 +26,13 @@
   height: 27px;
   margin-bottom: -2px;
 }
+
+/* ---------------------------------- */
+/* highlighting */
+h {
+  background: yellow;
+}
+
+hh {
+  background: #ff0000a1;
+}

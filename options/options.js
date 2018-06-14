@@ -2,6 +2,7 @@
 function save_options() {
   // options
   const pToken = document.getElementById('personal-token').value;
+  const textHighlight = document.getElementById('text-highlight').checked;
   const jiraTitleLink = document.getElementById('jira-title-link').checked;
   const jiraAnchor = document.getElementById('jira-anchor').checked;
   const gitBranchData = document.getElementById('git-branch-data').checked;
@@ -16,6 +17,7 @@ function save_options() {
   chrome.storage.sync.set(
     {
       pToken,
+      textHighlight,
       jiraTitleLink,
       jiraAnchor,
       jiraCopy,
@@ -43,6 +45,7 @@ function restore_options() {
   chrome.storage.sync.get(
     {
       pToken: '',
+      textHighlight: true,
       jiraTitleLink: false,
       jiraAnchor: false,
       gitBranchData: false,
@@ -56,6 +59,7 @@ function restore_options() {
     },
     function(items) {
       document.getElementById('personal-token').value = items.pToken;
+      document.getElementById('text-highlight').checked = items.textHighlight;
       document.getElementById('jira-title-link').checked = items.jiraTitleLink;
       document.getElementById('jira-anchor').checked = items.jiraAnchor;
       document.getElementById('git-branch-data').checked = items.gitBranchData;
