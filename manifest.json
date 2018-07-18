@@ -20,6 +20,7 @@
         "scripts/git_pr/add_copy.js",
         "scripts/git_pr/add_jira_link.js",
         "scripts/git_pr/add_highlighting.js",
+        "scripts/git_pr/add_copy_override.js",
         "scripts/git_pr/index.js"
       ],
       "css": ["styles/git_pr.css"]

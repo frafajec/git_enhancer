@@ -7,6 +7,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         textHighlight: true,
         jiraCopy: false,
         jiraTitleLink: false,
+        copyOverride: false,
         gitReviewsRequested: false,
         gitReviewsChanges: false,
         gitFileStats: false,
@@ -17,6 +18,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         textHighlight,
         jiraCopy,
         jiraTitleLink,
+        copyOverride,
         gitReviewsRequested,
         gitReviewsChanges,
         gitFileStats,
@@ -24,6 +26,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         jiraCopy && addCopyBtnPR();
         jiraTitleLink && addJiraLink();
         textHighlight && addHighlighting();
+        copyOverride && addCopyOverride();
 
         // ------------------------------
         // PR review requests call
