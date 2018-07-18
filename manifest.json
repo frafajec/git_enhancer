@@ -1,6 +1,6 @@
 {
   "name": "PicMonkey Git Enhancer",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "PicMonkey/Parkside helper extension",
   "manifest_version": 2,
   "permissions": ["tabs", "storage", "*://github.com/*"],
@@ -20,6 +20,7 @@
         "scripts/git_pr/add_copy.js",
         "scripts/git_pr/add_jira_link.js",
         "scripts/git_pr/add_highlighting.js",
+        "scripts/git_pr/add_copy_override.js",
         "scripts/git_pr/index.js"
       ],
       "css": ["styles/git_pr.css"]

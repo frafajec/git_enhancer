@@ -5,6 +5,7 @@ function save_options() {
   const textHighlight = document.getElementById('text-highlight').checked;
   const jiraTitleLink = document.getElementById('jira-title-link').checked;
   const jiraAnchor = document.getElementById('jira-anchor').checked;
+  const copyOverride = document.getElementById('copy-override').checked;
   const gitBranchData = document.getElementById('git-branch-data').checked;
   const gitUpdateDate = document.getElementById('git-update-date').checked;
   const gitReviews = document.getElementById('git-reviews').checked;
@@ -21,6 +22,7 @@ function save_options() {
       jiraTitleLink,
       jiraAnchor,
       jiraCopy,
+      copyOverride,
       gitBranchData,
       gitUpdateDate,
       gitReviews,
@@ -46,6 +48,7 @@ function restore_options() {
     {
       pToken: '',
       textHighlight: true,
+      copyOverride: true,
       jiraTitleLink: false,
       jiraAnchor: false,
       gitBranchData: false,
@@ -62,6 +65,7 @@ function restore_options() {
       document.getElementById('text-highlight').checked = items.textHighlight;
       document.getElementById('jira-title-link').checked = items.jiraTitleLink;
       document.getElementById('jira-anchor').checked = items.jiraAnchor;
+      document.getElementById('copy-override').checked = items.copyOverride;
       document.getElementById('git-branch-data').checked = items.gitBranchData;
       document.getElementById('git-update-date').checked = items.gitUpdateDate;
       document.getElementById('git-reviews').checked = items.gitReviews;
