@@ -48,9 +48,9 @@ function restore_options() {
     {
       pToken: '',
       textHighlight: true,
+      copyOverride: true,
       jiraTitleLink: false,
       jiraAnchor: false,
-      copyOverride: false,
       gitBranchData: false,
       gitUpdateDate: false,
       gitReviews: false,

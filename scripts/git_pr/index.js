@@ -5,9 +5,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     chrome.storage.sync.get(
       {
         textHighlight: true,
+        copyOverride: true,
         jiraCopy: false,
         jiraTitleLink: false,
-        copyOverride: false,
         gitReviewsRequested: false,
         gitReviewsChanges: false,
         gitFileStats: false,
