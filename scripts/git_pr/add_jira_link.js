@@ -8,6 +8,6 @@ function addJiraLink() {
     const replace =
       '<a href="https://picmonkey.atlassian.net/browse/$1" target="_blank" class="jira-title-link">$1</a>';
 
-    issueTitle[0].innerHTML = issueTitle[0].innerHTML.replace(/([a-z0-9]{2,5}-\d{1,4})/gi, replace);
+    issueTitle[0].innerHTML = issueTitle[0].innerHTML.replace(jiraNumberRegex, replace);
   }
 }
