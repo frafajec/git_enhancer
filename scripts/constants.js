@@ -1,6 +1,6 @@
 // ------------------------------------------------------------------
 // constants
-const jiraNumberRegex = /([a-z0-9]{2,5}-\d{1,4})/gi;
+const jiraNumberRegex = /([a-z0-9]{2,5}-\d{1,5})/gi;
 const repoRegex = /repos\/picmonkey\/(.*?)\//;
 const locationRepoRegex = /github.com\/picmonkey\/(.*?)\//;
 
