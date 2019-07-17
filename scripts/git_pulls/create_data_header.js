@@ -13,6 +13,6 @@ function createDataHeader({ gitReviewsRequested, gitReviewsFiltering, gitReviews
   const boxChanges = gitReviewsChanges ? `<div class="box-changes subnav-links float-left"></div>` : '';
   header.innerHTML = boxRequested + boxChanges + boxFiltering;
 
-  const anchor = document.querySelectorAll('.issues-listing .subnav')[0];
+  const anchor = document.querySelectorAll('.subnav')[0];
   anchor && anchor.appendChild(header);
 }

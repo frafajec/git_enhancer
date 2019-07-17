@@ -38,6 +38,9 @@ const seattleUsers = [
   'picHeidi',
   'scandeezy',
   'TNorth22',
+  'mjquigley',
+  'christalchavez123',
+  'caagaard',
 ];
 
 const REVIEW_STATE = {

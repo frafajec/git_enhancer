@@ -1,6 +1,6 @@
 {
   "name": "PicMonkey Git Enhancer",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "PicMonkey/Parkside helper extension",
   "manifest_version": 2,
   "permissions": ["tabs", "storage", "*://github.com/*"],
